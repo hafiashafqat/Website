@@ -1,0 +1,113 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momina Shahid Resume</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/turf"></script>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#map">Department of Space Science Map Visualization</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="container">
+            <h1>Momina Shahid</h1>
+            <p class="subtitle">GIS Analyst & Space Science Enthusiast</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About Me</h2>
+                <p>I am a GIS Analyst and I bring skills in GIS, spectral indices, DEM analysis, and watershed modeling, weather pattern analysis with a focus on blending atmospheric sciences and aerospace.</p>
+                <ul>
+                    <li><strong>Email:</strong> <a href="mailto:mominashahid66660@gmail.com">mominashahid66660@gmail.com</a></li>
+                    <li><strong>Location:</strong> <a href="https://goo.gl/maps/ZzPNUfR3htF6ntjN7" target="_blank">Space Science Department, University of the Punjab, Lahore, Pakistan</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <div class="container">
+                <h2>Experience</h2>
+                <div class="experience-item">
+                    <h3>6 weeks intern at Pakistan Meteorological Department</h3>
+                    <p>Worked on weather data analysis and environmental monitoring using GIS and Remote Sensing techniques.</p>
+                    <a href="https://www.pmd.gov.pk/" target="_blank">Website of PMD</a>
+                </div>
+                <div class="experience-item">
+                    <h3>RS and GIS Analyst at The Spatio</h3>
+                    <p>Handled geospatial data processing, analysis, and visualization, contributing to projects in urban planning and environmental monitoring.</p>
+                    <a href="https://thespatio.com/" target="_blank">Website of The Spatio</a>
+                </div>
+                <div class="experience-item">
+                    <h3>2 months at NESPAK</h3>
+                    <p>Worked as a GIS Analyst, supporting large-scale infrastructure projects by providing geospatial analysis and solutions.</p>
+                    <a href="https://www.nespak.com.pk/" target="_blank">Website of NESPAK</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="map" class="section">
+            <div class="container">
+                <h2>Department of Space Science Map Visualization</h2>
+                <div id="mapid" style="width: 100%; height: 500px;"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Momina Shahid. Hosted on <a href="https://github.com/" target="_blank">GitHub Pages</a>.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize map
+        const map = L.map('mapid').setView([31.494043, 74.2917275], 13);
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
+
+        // Add GeoJSON example data (replace with real data)
+        const geojsonFeature = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [74.2917275, 31.494043]
+            },
+            "properties": {
+                "name": "Space Science Department"
+            }
+        };
+
+        L.geoJSON(geojsonFeature, {
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(`<b>${feature.properties.name}</b>`);
+            }
+        }).addTo(map);
+
+        // Add distance measurement example
+        const pointA = turf.point([74.2917275, 31.494043]);
+        const pointB = turf.point([74.300000, 31.500000]);
+        const distance = turf.distance(pointA, pointB, { units: 'kilometers' });
+        console.log(`Distance between points: ${distance} km`);
+    </script>
+
+</body>
+</html>
