@@ -1,0 +1,110 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafia Shafqat - Meteorologist and GIS Analyst</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/turf"></script>
+</head>
+<body>
+    <!-- Header Section with Tabs -->
+    <header>
+        <div class="navbar">
+            <div class="header-content">
+                <h1>Hafia Shafqat</h1>
+                <p class="profession">Meteorologist and GIS Analyst</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#map">Map Visualization</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>I am a passionate Meteorologist and GIS Analyst with expertise in geospatial data analysis, remote sensing, and web development.</p>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2>Education</h2>
+            <ul>
+                <li><strong>University:</strong> University of the Punjab, Lahore</li>
+                <li><strong>Department:</strong> Department of Space Science</li>
+                <li><strong>Degree:</strong> BS in Space Science</li>
+                <li><strong>Year:</strong> 2021-2025</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2>Experience</h2>
+            <ul>
+                <li><strong>Intern:</strong> Asian Consulting Engineers - GIS Analyst Role (3 Months)</li>
+                <li><strong>Intern:</strong> Pakistan Meteorological Department (PMD) - Meteorology Role (1 Month)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Map Visualization Section -->
+    <section id="map" class="section">
+        <div class="container">
+            <h2>Map Visualization</h2>
+            <div id="mapid" style="width: 100%; height: 500px;"></div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Hafia Shafqat. Hosted on <a href="https://github.com/" target="_blank">GitHub Pages</a>.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize map
+        const map = L.map('mapid').setView([31.494043, 74.2917275], 13);
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
+
+        // Add GeoJSON example data
+        const geojsonFeature = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [74.2917275, 31.494043]
+            },
+            "properties": {
+                "name": "Space Science Department"
+            }
+        };
+
+        L.geoJSON(geojsonFeature, {
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(`<b>${feature.properties.name}</b>`);
+            }
+        }).addTo(map);
+
+        // Add distance measurement example
+        const pointA = turf.point([74.2917275, 31.494043]);
+        const pointB = turf.point([74.300000, 31.500000]);
+        const distance = turf.distance(pointA, pointB, { units: 'kilometers' });
+        console.log(`Distance between points: ${distance} km`);
+    </script>
+</body>
+</html>
